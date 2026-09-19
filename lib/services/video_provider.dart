@@ -32,12 +32,12 @@ class PlaybackTrack {
   });
 
   factory PlaybackTrack.fromJson(Map<String, dynamic> json) => PlaybackTrack(
-        id: json['id']?.toString(),
-        language: json['language']?.toString(),
-        label: json['label']?.toString(),
-        kind: json['kind']?.toString(),
-        url: json['url']?.toString(),
-      );
+    id: json['id']?.toString(),
+    language: json['language']?.toString(),
+    label: json['label']?.toString(),
+    kind: json['kind']?.toString(),
+    url: json['url']?.toString(),
+  );
 }
 
 class PlaybackDescriptor {
@@ -64,12 +64,16 @@ class PlaybackDescriptor {
   factory PlaybackDescriptor.fromJson(Map<String, dynamic> json) {
     final subtitleJson = json['subtitles'] is List
         ? List<Map<String, dynamic>>.from(
-            (json['subtitles'] as List).whereType<Map>().map(Map<String, dynamic>.from),
+            (json['subtitles'] as List).whereType<Map>().map(
+              Map<String, dynamic>.from,
+            ),
           )
         : const <Map<String, dynamic>>[];
     final audioJson = json['audio_tracks'] is List
         ? List<Map<String, dynamic>>.from(
-            (json['audio_tracks'] as List).whereType<Map>().map(Map<String, dynamic>.from),
+            (json['audio_tracks'] as List).whereType<Map>().map(
+              Map<String, dynamic>.from,
+            ),
           )
         : const <Map<String, dynamic>>[];
 
@@ -84,8 +88,12 @@ class PlaybackDescriptor {
       playbackId: json['playback_id']?.toString(),
       title: json['title']?.toString(),
       expiresAt: expiresAt,
-      subtitles: subtitleJson.map(PlaybackTrack.fromJson).toList(growable: false),
-      audioTracks: audioJson.map(PlaybackTrack.fromJson).toList(growable: false),
+      subtitles: subtitleJson
+          .map(PlaybackTrack.fromJson)
+          .toList(growable: false),
+      audioTracks: audioJson
+          .map(PlaybackTrack.fromJson)
+          .toList(growable: false),
     );
   }
 }

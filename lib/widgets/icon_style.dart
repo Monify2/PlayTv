@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../core/theme.dart';
 
 /// PlayTv's shared icon language: thin, simple, monochrome icons on graphite,
@@ -9,15 +10,22 @@ class PlayTvIcon extends StatelessWidget {
   final bool active;
   final Color? color;
   final String? semanticLabel;
-  const PlayTvIcon(this.icon, {super.key, this.size = 21, this.active = false, this.color, this.semanticLabel});
+  const PlayTvIcon(
+    this.icon, {
+    super.key,
+    this.size = 21,
+    this.active = false,
+    this.color,
+    this.semanticLabel,
+  });
 
   @override
   Widget build(BuildContext context) => Icon(
-        icon,
-        size: size,
-        color: color ?? (active ? PlayTvColors.green : PlayTvColors.icon),
-        semanticLabel: semanticLabel,
-      );
+    icon,
+    size: size,
+    color: color ?? (active ? PlayTvColors.green : PlayTvColors.icon),
+    semanticLabel: semanticLabel,
+  );
 }
 
 class MoreIconButton extends StatelessWidget {
@@ -26,11 +34,11 @@ class MoreIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => IconButton(
-        onPressed: onPressed,
-        tooltip: 'More',
-        visualDensity: VisualDensity.compact,
-        constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
-        iconSize: 22,
-        icon: const PlayTvIcon(Icons.more_horiz_rounded, size: 22),
-      );
+    onPressed: onPressed,
+    tooltip: 'More',
+    visualDensity: VisualDensity.compact,
+    constraints: const BoxConstraints(minWidth: 34, minHeight: 34),
+    iconSize: 22,
+    icon: const PlayTvIcon(Icons.more_horiz_rounded, size: 22),
+  );
 }

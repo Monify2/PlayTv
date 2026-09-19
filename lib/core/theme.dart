@@ -15,15 +15,16 @@ class PlayTvColors {
 
 class PlayTvTheme {
   static ThemeData dark() {
-    final scheme = ColorScheme.fromSeed(
-      seedColor: PlayTvColors.green,
-      brightness: Brightness.dark,
-    ).copyWith(
-      primary: PlayTvColors.green,
-      onPrimary: Colors.black,
-      surface: PlayTvColors.surface,
-      onSurface: PlayTvColors.text,
-    );
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: PlayTvColors.green,
+          brightness: Brightness.dark,
+        ).copyWith(
+          primary: PlayTvColors.green,
+          onPrimary: Colors.black,
+          surface: PlayTvColors.surface,
+          onSurface: PlayTvColors.text,
+        );
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -43,7 +44,10 @@ class PlayTvTheme {
         fillColor: PlayTvColors.surface,
         hintStyle: const TextStyle(color: PlayTvColors.muted),
         labelStyle: const TextStyle(color: PlayTvColors.muted),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: PlayTvColors.line),
@@ -61,8 +65,16 @@ class PlayTvTheme {
       chipTheme: ChipThemeData(
         backgroundColor: PlayTvColors.surface2,
         selectedColor: PlayTvColors.green,
-        labelStyle: const TextStyle(color: PlayTvColors.text, fontSize: 12, fontWeight: FontWeight.w700),
-        secondaryLabelStyle: const TextStyle(color: Colors.black, fontSize: 12, fontWeight: FontWeight.w800),
+        labelStyle: const TextStyle(
+          color: PlayTvColors.text,
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+        ),
+        secondaryLabelStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 12,
+          fontWeight: FontWeight.w800,
+        ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../core/theme.dart';
 import '../widgets/icon_style.dart';
 import 'home_screen.dart';
@@ -8,7 +9,8 @@ import 'profile_screen.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
-  @override State<AppShell> createState() => _AppShellState();
+  @override
+  State<AppShell> createState() => _AppShellState();
 }
 
 class _AppShellState extends State<AppShell> {
@@ -37,11 +39,31 @@ class _AppShellState extends State<AppShell> {
         indicatorColor: PlayTvColors.green.withValues(alpha: .16),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         destinations: const [
-          NavigationDestination(icon: PlayTvIcon(Icons.home_outlined), selectedIcon: PlayTvIcon(Icons.home, active: true), label: 'Home'),
-          NavigationDestination(icon: PlayTvIcon(Icons.movie_outlined), selectedIcon: PlayTvIcon(Icons.movie, active: true), label: 'Movies'),
-          NavigationDestination(icon: PlayTvIcon(Icons.tv_outlined), selectedIcon: PlayTvIcon(Icons.tv, active: true), label: 'TV Series'),
-          NavigationDestination(icon: PlayTvIcon(Icons.cloud_download_outlined), selectedIcon: PlayTvIcon(Icons.cloud_download, active: true), label: 'Downloads'),
-          NavigationDestination(icon: PlayTvIcon(Icons.menu_rounded), selectedIcon: PlayTvIcon(Icons.menu_rounded, active: true), label: 'Menu'),
+          NavigationDestination(
+            icon: PlayTvIcon(Icons.home_outlined),
+            selectedIcon: PlayTvIcon(Icons.home, active: true),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            icon: PlayTvIcon(Icons.movie_outlined),
+            selectedIcon: PlayTvIcon(Icons.movie, active: true),
+            label: 'Movies',
+          ),
+          NavigationDestination(
+            icon: PlayTvIcon(Icons.tv_outlined),
+            selectedIcon: PlayTvIcon(Icons.tv, active: true),
+            label: 'TV Series',
+          ),
+          NavigationDestination(
+            icon: PlayTvIcon(Icons.cloud_download_outlined),
+            selectedIcon: PlayTvIcon(Icons.cloud_download, active: true),
+            label: 'Downloads',
+          ),
+          NavigationDestination(
+            icon: PlayTvIcon(Icons.menu_rounded),
+            selectedIcon: PlayTvIcon(Icons.menu_rounded, active: true),
+            label: 'Menu',
+          ),
         ],
       ),
     );

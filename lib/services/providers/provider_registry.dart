@@ -6,7 +6,8 @@ import '../video_provider.dart';
 /// side. Keeping this registry in the app makes provider identity explicit
 /// without allowing the UI to depend on either vendor SDK/API.
 class ProviderRegistry {
-  static VideoProvider parse(String? provider) => videoProviderFromString(provider);
+  static VideoProvider parse(String? provider) =>
+      videoProviderFromString(provider);
 
   static const supported = <VideoProvider>[
     VideoProvider.fastpix,

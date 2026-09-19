@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+
 import '../core/config.dart';
 import 'supabase_service.dart';
 import 'video_provider.dart';
@@ -27,11 +28,13 @@ class PlaybackService implements VideoPlaybackProvider {
         'title_id': titleId,
         if (episodeId != null) 'episode_id': episodeId,
       },
-      options: Options(headers: {
-        'Authorization': 'Bearer ${session.accessToken}',
-        'apikey': AppConfig.supabasePublishableKey,
-        'Content-Type': 'application/json',
-      }),
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer ${session.accessToken}',
+          'apikey': AppConfig.supabasePublishableKey,
+          'Content-Type': 'application/json',
+        },
+      ),
     );
 
     final data = Map<String, dynamic>.from(
