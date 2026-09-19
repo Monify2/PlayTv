@@ -11,10 +11,13 @@ class DownloadService {
     String? episodeId,
     String quality = 'HD',
   }) async {
-    if (!SupabaseService.isReady)
+    if (!SupabaseService.isReady) {
       throw Exception('PlayTv backend is not configured.');
+    }
     final session = SupabaseService.client.auth.currentSession;
-    if (session == null) throw Exception('Please sign in again.');
+    if (session == null) {
+      throw Exception('Please sign in again.');
+    }
     final response = await _dio.post(
       '${AppConfig.supabaseUrl}/functions/v1/${AppConfig.downloadFunction}',
       data: {

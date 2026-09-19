@@ -37,17 +37,19 @@ class _PlayerScreenState extends State<PlayerScreen> {
       final c = VideoPlayerController.networkUrl(Uri.parse(r.url));
       await c.initialize();
       await c.play();
-      if (mounted)
+      if (mounted) {
         setState(() {
           controller = c;
           loading = false;
         });
+      }
     } catch (e) {
-      if (mounted)
+      if (mounted) {
         setState(() {
           error = '$e';
           loading = false;
         });
+      }
     }
   }
 
