@@ -1,3 +1,5 @@
+import '../widgets/icon_style.dart';
+
 import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
