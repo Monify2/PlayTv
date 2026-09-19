@@ -328,7 +328,7 @@ class _Continue extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 2),
-                      MoreIconButton(onPressed: () {}),
+                      const MoreIconButton(),
                     ],
                   ),
                 ),

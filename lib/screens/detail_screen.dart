@@ -60,9 +60,9 @@ class _DetailScreenState extends State<DetailScreen> {
   Future<void> toggle() async {
     try {
       if (saved) {
-        await api.removeFromWatchlist(widget.id);
+        await api.removeWatchlist(widget.id);
       } else {
-        await api.addToWatchlist(widget.id);
+        await api.addWatchlist(widget.id);
       }
 
       if (!mounted) return;

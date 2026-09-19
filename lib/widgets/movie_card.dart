@@ -99,11 +99,13 @@ class MovieCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800),
             ),
-            if (item.year != null)
+            if (item.releaseDate != null)
               Padding(
                 padding: const EdgeInsets.only(top: 3),
                 child: Text(
-                  '${item.year}',
+                  item.releaseDate!.length >= 4
+                      ? item.releaseDate!.substring(0, 4)
+                      : item.releaseDate!,
                   style: const TextStyle(
                     color: PlayTvColors.muted,
                     fontSize: 10,
