@@ -29,6 +29,9 @@ jobs:
       - name: Generate Android platform files
         run: flutter create --platforms=android --project-name playtv .
 
+      - name: Remove generated tests
+        run: rm -rf test
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
