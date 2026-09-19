@@ -39,8 +39,6 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Format check
-
       - name: Analyze
         run: flutter analyze
 
