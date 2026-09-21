@@ -145,9 +145,6 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
-  bool _isPremiumAccount(Map<String, dynamic> me) {
-    if (me['is_premium'] == true || me['premium'] == true) return true;
-
     final entitlement = me['entitlement'];
     if (entitlement is Map && entitlement['is_premium'] == true) return true;
 
@@ -160,14 +157,6 @@ class _DetailScreenState extends State<DetailScreen> {
 
     return false;
   }
-
-  bool _isHighQuality(String quality) =>
-      quality == 'HD' || quality == 'Full HD' || quality == '4K';
-
-  String _backendQuality(String quality) {
-    switch (quality) {
-      case 'DATA_SAVER':
-        return 'SD';
       case 'Full HD':
         return 'Full HD';
       case '4K':
@@ -623,9 +612,6 @@ class _Tag extends StatelessWidget {
 
   const _Tag(this.text);
 
-  bool _isPremiumAccount(Map<String, dynamic> me) {
-    if (me['is_premium'] == true || me['premium'] == true) return true;
-
     final entitlement = me['entitlement'];
     if (entitlement is Map && entitlement['is_premium'] == true) return true;
 
@@ -638,14 +624,6 @@ class _Tag extends StatelessWidget {
 
     return false;
   }
-
-  bool _isHighQuality(String quality) =>
-      quality == 'HD' || quality == 'Full HD' || quality == '4K';
-
-  String _backendQuality(String quality) {
-    switch (quality) {
-      case 'DATA_SAVER':
-        return 'SD';
       case 'Full HD':
         return 'Full HD';
       case '4K':
