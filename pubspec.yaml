@@ -1,0 +1,25 @@
+name: playtv
+description: PlayTv premium streaming client.
+publish_to: "none"
+version: 1.0.0+2
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  supabase_flutter: ^2.10.0
+  video_player: ^2.10.0
+  cached_network_image: ^3.4.1
+  dio: ^5.9.0
+  path_provider: ^2.1.5
+  open_filex: ^4.7.0
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
