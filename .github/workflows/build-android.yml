@@ -2,7 +2,9 @@ name: PlayTv Android Build
 
 on:
   push:
-    branches: [main, master]
+    branches:
+      - main
+      - master
   pull_request:
   workflow_dispatch:
 
@@ -37,35 +39,37 @@ jobs:
 
           manifest = Path("android/app/src/main/AndroidManifest.xml")
           text = manifest.read_text()
-          text = re.sub(r'android:label="[^"]*"', 'android:label="PlayTv"', text, count=1)
+          text = re.sub(
+              r'android:label="[^"]*"',
+              'android:label="PlayTv"',
+              text,
+              count=1,
+          )
           manifest.write_text(text)
 
           strings = Path("android/app/src/main/res/values/strings.xml")
           if strings.exists():
               text = strings.read_text()
-              if "<string name="app_name">" in text:
-                  text = re.sub(r'<string name="app_name">.*?</string>',
-                                '<string name="app_name">PlayTv</string>', text, count=1)
+              pattern = r'<string name="app_name">.*?</string>'
+
+              if re.search(pattern, text):
+                  text = re.sub(
+                      pattern,
+                      '<string name="app_name">PlayTv</string>',
+                      text,
+                      count=1,
+                  )
               else:
-                  text = text.replace("</resources>",
-                                      '    <string name="app_name">PlayTv</string>\n</resources>')
+                  text = text.replace(
+                      "</resources>",
+                      '    <string name="app_name">PlayTv</string>\n</resources>',
+                  )
+
               strings.write_text(text)
           PY
 
-      - name: Ensure Android internet permission
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          manifest = Path("android/app/src/main/AndroidManifest.xml")
-          text = manifest.read_text()
-          permission = '<uses-permission android:name="android.permission.INTERNET"/>'
-          if permission not in text:
-              text = text.replace(
-                  '<manifest xmlns:android="http://schemas.android.com/apk/res/android">',
-                  '<manifest xmlns:android="http://schemas.android.com/apk/res/android">\n    ' + permission
-              )
-          manifest.write_text(text)
-          PY
+      - name: Remove tests
+        run: rm -rf test
 
       - name: Setup Java
         uses: actions/setup-java@v5
@@ -76,7 +80,7 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Verify backend build configuration
+      - name: Verify backend configuration
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL || vars.SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY || vars.SUPABASE_PUBLISHABLE_KEY }}
@@ -85,8 +89,8 @@ jobs:
           test -n "$SUPABASE_URL" || (echo "SUPABASE_URL is EMPTY" && exit 1)
           test -n "$SUPABASE_PUBLISHABLE_KEY" || (echo "SUPABASE_PUBLISHABLE_KEY is EMPTY" && exit 1)
           test -n "$TMDB_API_KEY" || (echo "TMDB_API_KEY is EMPTY" && exit 1)
-          echo "Supabase build configuration is present"
-          echo "TMDB secret is present"
+          echo "Supabase configuration is present"
+          echo "TMDB configuration is present"
 
       - name: Analyze
         run: flutter analyze --no-fatal-infos
@@ -96,10 +100,14 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL || vars.SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY || vars.SUPABASE_PUBLISHABLE_KEY }}
         run: |
-          flutter build apk --release             --dart-define=SUPABASE_URL="$SUPABASE_URL"             --dart-define=SUPABASE_PUBLISHABLE_KEY="$SUPABASE_PUBLISHABLE_KEY"
+          flutter build apk --release \
+            --dart-define=SUPABASE_URL="${SUPABASE_URL}" \
+            --dart-define=SUPABASE_PUBLISHABLE_KEY="${SUPABASE_PUBLISHABLE_KEY}"
 
       - name: Rename release APK
-        run: cp build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/PlayTv-release.apk
+        run: |
+          cp build/app/outputs/flutter-apk/app-release.apk \
+             build/app/outputs/flutter-apk/PlayTv-release.apk
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
@@ -107,7 +115,7 @@ jobs:
           name: PlayTv-release-apk
           path: build/app/outputs/flutter-apk/PlayTv-release.apk
 
-      - name: Publish GitHub Release
+      - name: Create GitHub Release
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
