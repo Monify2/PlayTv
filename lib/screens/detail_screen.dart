@@ -126,17 +126,13 @@ class _DetailScreenState extends State<DetailScreen> {
         onProgress: (_) {},
       );
 
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              result.subtitlePath == null
-                  ? 'Download saved for offline use.'
-                  : 'Video and subtitles saved offline.',
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Download saved for offline use.'),
             ),
-          ),
-        );
-      }
+          );
+        }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context)
@@ -145,26 +141,38 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
-    final entitlement = me['entitlement'];
-    if (entitlement is Map && entitlement['is_premium'] == true) return true;
+    bool _isPremiumAccount(dynamic me) {
+      if (me is! Map) return false;
 
-    final subscription = me['subscription'];
-    if (subscription is Map) {
-      final status = '${subscription['status'] ?? ''}'.toLowerCase();
-      return (status == 'active' || status == 'trialing') &&
-          subscription['plan'] != null;
+      final entitlement = me['entitlement'];
+      if (entitlement is Map && entitlement['is_premium'] == true) {
+        return true;
+      }
+
+      final subscription = me['subscription'];
+      if (subscription is Map) {
+        final status = '${subscription['status'] ?? ''}''.toLowerCase();
+        return (status == 'active' || status == 'trialing') &&
+        final status = '${subscription['status'] ?? ''}'.toLowerCase();
+      }
+
+      return false;
     }
 
-    return false;
-  }
-      case 'Full HD':
-        return 'Full HD';
-      case '4K':
-        return '4K';
-      default:
-        return quality;
+    bool _isHighQuality(String quality) {
+      return quality == 'Full HD' || quality == '4K';
     }
-  }
+
+    String _backendQuality(String quality) {
+      switch (quality) {
+        case 'Full HD':
+          return 'Full HD';
+        case '4K':
+          return '4K';
+        default:
+          return quality;
+      }
+    }
 
   @override
   Widget build(BuildContext context) {
